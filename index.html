@@ -21,29 +21,67 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.1/dist/css/foundation-rtl.min.css"
         integrity="sha256-XlxeWxDsQfPdu4qiEAxQAng3/qnJhvZOZN/gZn0p71A= sha384-S/sFafRa3RAsKpyPwVCUZO8sjM+Sxh4qrVEC/XA9X0LXu7PduBaHpp3oWUyUq0qS sha512-T65eRA7TK5abF14H5Ovs6ov3lRSJkMEY7aI4B6nEtBA+kbtdhXwC2KO46kS4f68ysRXW5+Zu66054x369DRvYw=="
         crossorigin="anonymous">
+    <link href='http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="style.css">
     <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js'></script>
 </head>
 
 <body>
-    <div class="grid-container">
-      
-       
-        
-        <div>
-            <input type="text" placeholder="Name of task" data-bind="text: name">
-            <textarea cols="5" rows="3" placeholder="to do..." data-bind="value: description"></textarea>
+    <div class="grid-container container">
+        <div class="add-note-form">
+            <div class="add-note-body" data-bind="fadeVisible: displayNoteForm">
+                <input type="text" placeholder="Name of task" data-bind="value: name">
+                <textarea cols="5" rows="3" placeholder="to do..." data-bind="value: description"></textarea>
+            </div>
             <input type="button" class="succes button" data-bind="click: addNewNote" value="Add note">
-            <input type="button" class="secondary button" data-bind="click: hideNotes, value: hideButtonName">
         </div>
-       
-        <div data-bind='fadeVisible: displayNotes'>
+
+        <div>
             <table>
                 <tbody data-bind="foreach: toDos">
                     <tr>
                         <td>
-                            <h3 data-bind="text: name"></h3>
-                            <p data-bind="text: description"></p>
+                            <div class="todo-list-item">
+                                <div class="list-item-normal" data-bind="visible: !isVisible()">
+                                    <div class="list-item-head">
+                                        <h3 data-bind="text: name"></h3>
+                                        <div class="icons">
+                                            <i class="fi-trash" data-bind="click: deleteNote($root.toDos)"></i>
+                                            <i class="fi-page-edit" data-bind="click: changeMode"></i>
+                                        </div>
+                                    </div>
+                                    <div class="list-item-body">
+
+                                        <p data-bind="text: description"></p>
+                                    </div>
+                                    <div class="list-item-additional">
+                                        <p data-bind="text: date"></p>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-editing" data-bind="visible: isVisible">
+                                    <div class="list-item-head">
+                                        <input class="text-input" type="text" data-bind="value: name">
+                                        <div class="icons">
+                                                <i class="fi-x" data-bind="click: changeMode"></i>
+                                            </div>
+                                    </div>
+                                    <div class="list-item-body">
+                                        <textarea class="text-input" rows="4" data-bind="value: description"></textarea>
+                                    </div>
+
+                                    <div class="item-bottom">
+                                        <input type="button" class="accept button" value="Save">
+                                        <div class="list-item-additional">
+
+                                            <p data-bind="text: date"></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </td>
                     </tr>
                 </tbody>

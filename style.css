@@ -1,3 +1,51 @@
-.search-box{
+.list-item-additional p {
+    color: #999999;
+
+}
+
+.list-item-additional{
+ align-self: flex-end;
+}
+
+.list-item-normal {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-bottom{
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-item-editing{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.list-item-editing textarea{
+    resize: vertical;
+}
+
+.list-item-head{
+    display: flex;
+    justify-content: space-between
+}
+
+.list-item-head .icons{
+    align-self: top;
+}
+
+.list-item-head i{
+    color: #999999;
+    margin: 0 2px;
+}
+
+.list-item-head i:hover{
+    color: blueviolet;
+}
+
+.text-input{
+    width: 94%;
 }

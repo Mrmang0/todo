@@ -1,40 +1,50 @@
 function toDoNote(name, description) {
     var self = this;
-    self.name = name;
-    self.description = description;
+    self.name = ko.observable(name);
+    self.description = ko.observable(description);
+    let tDate = new Date();
+    self.date = ko.observable(tDate.getHours() + ':' + tDate.getMinutes() + " " + tDate.getDate() + '.' + tDate.getMonth() + '.' + tDate.getFullYear());
+    self.isVisible = ko.observable(false);
+    self.changeMode = function () {
+        self.isVisible(!self.isVisible());
+    }
+    self.deleteNote =function(root){
+    console.log(    root.indexOf(self));
+    }
 }
 
-// Overall viewmodel for this screen, along with initial state
+
 function toDoViewModel() {
     var self = this;
-    self.name = ko.observable("wow its a name");
-    self.description = ko.observable("wow its a description");
-    // Non-editable catalog data - would come from the server
+    self.name = ko.observable("");
+    self.description = ko.observable("");
+    self.displayNoteForm = ko.observable(false);
 
-    self.log = function () {
-        console.log()
-    }
 
     // Editable data
     self.toDos = ko.observableArray([
-        new toDoNote("Steve", "brow"),
-        new toDoNote("Bert", "seat")
+        new toDoNote("first", "just nothing"),
+        new toDoNote("second", "still nothing",self)
     ]);
 
     self.addNewNote = function () {
-        self.toDos.push(new toDoNote(self.name, self.description))
+
+        if (!self.displayNoteForm()) {
+            console.log(self.displayNoteForm())
+            self.displayNoteForm(!self.displayNoteForm());
+        } else {
+            self.toDos.push(new toDoNote(self.name(), self.description()));
+            self.displayNoteForm(!self.displayNoteForm())
+            self.name("");
+            self.description("");
+
+        }
+
     }
 
-    self.displayNotes = ko.observable(true);
 
-    self.hideButtonName = ko.observable(self.displayNotes ? "Hide notes" : "Show notes")
-    self.hideNotes = function () {
-        self.displayNotes(!self.displayNotes());
-        self.hideButtonName(self.displayNotes() ? "Hide notes" : "Show notes")
-        console.log(self.displayNotes());
-        console.log(self.hideButtonName());
-        
-    }
+
+
 }
 
 ko.bindingHandlers.fadeVisible = {
