@@ -24,8 +24,8 @@
     justify-content: space-between;
 }
 
-.list-item-editing textarea{
-    resize: vertical;
+textarea{
+    resize: none;
 }
 
 .list-item-head{
@@ -37,15 +37,39 @@
     align-self: top;
 }
 
-.list-item-head i{
-    color: #999999;
-    margin: 0 2px;
+ i{
+    color: #777777;
+    margin: 4px;
 }
 
-.list-item-head i:hover{
+i:hover{
     color: blueviolet;
 }
 
 .text-input{
     width: 94%;
 }
+
+.footer{
+    position: fixed;
+    width: 100%;
+    margin-left: -15px;
+    bottom: 0px;
+}
+
+.add-note-icons{
+    width: 100%;
+    display: flex; 
+    flex-direction: row-reverse;
+    
+}
+
+.add-note-body{
+    margin: 5px;
+    outline: #999999
+}
+
+.error-message{
+    color: #771133
+}
+
